@@ -2,7 +2,7 @@ import db from '../db.js';
 
 export const getReadings = async (req, res) => {
   try {
-    const [rows] = await db.query('SELECT * FROM readings ORDER BY timestamp DESC');
+    const [rows] = await db.query('SELECT * FROM readings ORDER BY created_at DESC');
     res.json(rows);
   } catch (err) {
     console.error('DB Read Error:', err.message);
