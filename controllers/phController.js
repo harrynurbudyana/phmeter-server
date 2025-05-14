@@ -18,7 +18,7 @@ export const addReading = async (req, res) => {
     }
 
     await db.query(
-      'INSERT INTO readings (ph, temperature, timestamp) VALUES (?, ?, NOW())',
+      'INSERT INTO readings (ph, temperature, created_at) VALUES (?, ?, NOW())',
       [ph, temperature]
     );
 
