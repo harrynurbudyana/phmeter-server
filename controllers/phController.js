@@ -12,14 +12,14 @@ export const getReadings = async (req, res) => {
 
 export const addReading = async (req, res) => {
   try {
-    const { ph, temperature } = req.body;
-    if (ph == null || temperature == null) {
+    const { ph, temperature, tds } = req.body;
+    if (ph == null || temperature == null || tds == null) {
       return res.status(400).json({ error: 'Missing fields' });
     }
 
     await db.query(
-      'INSERT INTO readings (ph, temperature, created_at) VALUES (?, ?, NOW())',
-      [ph, temperature]
+      'INSERT INTO readings (ph, temperature, tds, created_at) VALUES (?, ?, NOW())',
+      [ph, temperature, tds]
     );
 
     res.status(201).json({ message: 'Reading stored' });
