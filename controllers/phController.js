@@ -1,4 +1,7 @@
 import db from '../db.js';
+import moment from 'moment-timezone';
+
+const jakartaTime = moment().tz('Asia/Jakarta').format('YYYY-MM-DD HH:mm:ss');
 
 export const getReadings = async (req, res) => {
   try {
@@ -18,8 +21,8 @@ export const addReading = async (req, res) => {
     }
 
     await db.query(
-      'INSERT INTO readings (ph, temperature, tds, created_at) VALUES (?, ?, ?, NOW())',
-      [ph, temperature, tds]
+      'INSERT INTO readings (ph, temperature, tds, created_at) VALUES (?, ?, ?, ?)',
+      [ph, temperature, tds, jakartaTime]
     );
 
     res.status(201).json({ message: 'Reading stored' });
